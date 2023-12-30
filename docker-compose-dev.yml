@@ -12,5 +12,19 @@ services:
     volumes:
      - /usr/src/app/node_modules
      - ./:/usr/src/app
-    
+    environment:
+      - WATCHPACK_POLLING=true
     stdin_open: true
+  
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    volumes:
+     - /usr/src/app/node_modules
+     - ./:/usr/src/app
+    environment:
+      - WATCHPACK_POLLING=true
+    command: ["npm", "run", "test"]
+    
